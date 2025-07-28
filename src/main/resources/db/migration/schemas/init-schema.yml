@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00-init-schema
+      author: mike
+      changes:
+        - sql:
+            sql: CREATE SCHEMA IF NOT EXISTS ${schema};
