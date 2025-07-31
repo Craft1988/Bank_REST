@@ -4,4 +4,4 @@ databaseChangeLog:
       author: mike
       changes:
         - sql:
-            sql: CREATE SCHEMA IF NOT EXISTS ${schema};
+            sql: CREATE SCHEMA IF NOT EXISTS ${schema}
