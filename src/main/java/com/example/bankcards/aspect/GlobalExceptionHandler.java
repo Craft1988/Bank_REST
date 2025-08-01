@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDto> handleValidationException(MethodArgumentNotValidException ex) {
-        // Извлекаем первую ошибку валидации (можно собрать все, если нужно)
         String fieldName = Objects.requireNonNull(ex.getBindingResult().getFieldError()).getField();
         String errorMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
 
@@ -31,6 +30,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(response);
     }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDto> handleDataIntegrity() {
         ErrorResponseDto error = new ErrorResponseDto(

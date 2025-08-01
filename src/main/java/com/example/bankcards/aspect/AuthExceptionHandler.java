@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class AuthExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ErrorResponseDto> handleBadCredentials(BadCredentialsException e) {
+    public ResponseEntity<ErrorResponseDto> handleBadCredentials() {
         ErrorResponseDto error = new ErrorResponseDto(
                 "UNAUTHORIZED",
                 "Неверные имя пользователя или пароль",
@@ -25,7 +25,7 @@ public class AuthExceptionHandler {
     }
 
     @ExceptionHandler({DisabledException.class, LockedException.class})
-    public ResponseEntity<ErrorResponseDto> handleAccountIssues(Exception e) {
+    public ResponseEntity<ErrorResponseDto> handleAccountIssues() {
         ErrorResponseDto error = new ErrorResponseDto(
                 "FORBIDDEN",
                 "Аккаунт отключён или заблокирован",
