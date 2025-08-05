@@ -1,17 +1,8 @@
 package com.example.bankcards.entity;
 
 import com.example.bankcards.entity.enums.CardStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import com.example.bankcards.util.cardutils.CardMaskConverter;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +19,7 @@ public class Card {
     @SequenceGenerator(name = "card_id_generator", sequenceName = "card_id_sequence", allocationSize = 1)
     private Long id;
 
+    @Convert(converter = CardMaskConverter.class)
     private String number;
 
     @ManyToOne

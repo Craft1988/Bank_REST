@@ -5,7 +5,7 @@ import com.example.bankcards.dto.card.CreateCardRequest;
 import com.example.bankcards.entity.Card;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface CardMapper {
 
     Card fromDto(CreateCardRequest request);

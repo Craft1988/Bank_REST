@@ -10,6 +10,7 @@ import com.example.bankcards.mapper.CardMapper;
 import com.example.bankcards.repository.CardRepository;
 import com.example.bankcards.repository.UserRepository;
 import com.example.bankcards.service.CardService;
+import com.example.bankcards.util.cardutils.CardNumberGenerator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,7 @@ public class CardServiceImpl implements CardService {
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
 
         Card card = cardMapper.fromDto(req);
+        card.setNumber(CardNumberGenerator.number());
         card.setOwner(owner);
 
         return cardMapper.fromCard(cardRepository.save(card));

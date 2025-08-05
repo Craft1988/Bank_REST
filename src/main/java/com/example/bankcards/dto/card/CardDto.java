@@ -2,6 +2,7 @@ package com.example.bankcards.dto.card;
 
 import com.example.bankcards.entity.enums.CardStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @Schema(description = "Информация о карте")
 public class CardDto {
 
@@ -28,6 +30,6 @@ public class CardDto {
     @Schema(description = "Баланс на карте", example = "2500.00")
     private BigDecimal balance;
 
-    @Schema(description = "Имя пользователя — владельца карты", example = "mikhail_dev")
+    @Schema(description = "Имя пользователя — владельца карты", example = "ivan")
     private String ownerUsername;
 }
