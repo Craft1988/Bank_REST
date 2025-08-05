@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/migration/tables/create-users-table.yml
   - include:
       file: db/migration/tables/create-cards-table.yml
+  - include:
+      file: db/migration/tables/create-transactions-table.yml

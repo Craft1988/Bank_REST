@@ -1,4 +1,4 @@
-package com.example.bankcards.service;
+package com.example.bankcards.service.impl;
 
 import com.example.bankcards.dto.auth.request.AuthRequestDto;
 import com.example.bankcards.dto.user.response.UserDto;

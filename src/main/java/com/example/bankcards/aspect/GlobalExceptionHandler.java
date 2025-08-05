@@ -1,6 +1,8 @@
 package com.example.bankcards.aspect;
 
 import com.example.bankcards.dto.error.ErrorResponseDto;
+import com.example.bankcards.exception.BankRestException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,23 @@ import java.util.Objects;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * Обработка кастомного исключения BankRestException.
+     *
+     * @param ex исключение, содержащее статус и сообщение
+     * @return DTO с информацией об ошибке
+     */
+    @ExceptionHandler(BankRestException.class)
+    public ResponseEntity<ErrorResponseDto> handleBankRestException(BankRestException ex) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto(
+                ex.getHttpStatus().getReasonPhrase(),
+                ex.getMessage(),
+                ex.getHttpStatus().value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, ex.getHttpStatus());
+    }
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -30,6 +49,18 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(response);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleEntityNotFoundException(EntityNotFoundException ex) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto(
+                "NOT_FOUND",
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDto> handleDataIntegrity() {

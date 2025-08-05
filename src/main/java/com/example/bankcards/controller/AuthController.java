@@ -3,7 +3,7 @@ package com.example.bankcards.controller;
 import com.example.bankcards.dto.auth.request.AuthRequestDto;
 import com.example.bankcards.dto.error.ErrorResponseDto;
 import com.example.bankcards.dto.user.response.UserDto;
-import com.example.bankcards.service.AuthService;
+import com.example.bankcards.service.impl.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

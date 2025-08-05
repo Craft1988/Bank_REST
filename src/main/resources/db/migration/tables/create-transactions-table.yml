@@ -1,10 +1,16 @@
-databaseChangelog:
+databaseChangeLog:
   - changeSet:
       id: 03-create-transactions-table
       author: mike
+      preConditions:
+        onFail: MARK_RAN
+                  - not:
+                  tableExists:
+                    tableName: transactions
       changes:
         - createTable:
             tableName: transactions
+            schemaName: ${schema}
             columns:
               - column:
                   name: id
@@ -56,6 +62,8 @@ databaseChangelog:
                   referencedTableName: cards
                   referencedColumnNames: id
                   constraintName: fk_tx_from_card
+                  baseTableSchemaName: ${schema}
+                  referencedTableSchemaName: ${schema}
 
               - addForeignKeyConstraint:
                   baseTableName: transactions
@@ -63,3 +71,5 @@ databaseChangelog:
                   referencedTableName: cards
                   referencedColumnNames: id
                   constraintName: fk_tx_to_card
+                  baseTableSchemaName: ${schema}
+                  referencedTableSchemaName: ${schema}
