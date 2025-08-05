@@ -3,10 +3,10 @@ databaseChangeLog:
       id: 01-create-users-table
       author: mike
       preConditions:
-        onFail: MARK_RAN
-                  - not:
-                  tableExists:
-                    tableName: users
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
       changes:
         - createTable:
             tableName: users

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "BANK_REST",
                 version = "1.0",
-                description = "API с JWT-аутентификацией",
+                description = "API сервиса управления банковскими картами",
                 contact = @Contact(name = "Михаил", email = "craft8819@gmail.com")
         )
 )

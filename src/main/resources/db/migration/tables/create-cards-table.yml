@@ -3,10 +3,10 @@ databaseChangeLog:
       id: 02-create-cards-table
       author: mike
       preConditions:
-        onFail: MARK_RAN
-                  - not:
-                  tableExists:
-                    tableName: cards
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: cards
       changes:
         - createTable:
             tableName: cards

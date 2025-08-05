@@ -25,7 +25,7 @@ import java.time.LocalDate;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_id_generator")
-    @SequenceGenerator(name = "user_id_generator", sequenceName = "card_id_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "card_id_generator", sequenceName = "card_id_sequence", allocationSize = 1)
     private Long id;
 
     private String number;

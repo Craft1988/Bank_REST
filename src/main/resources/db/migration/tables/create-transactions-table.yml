@@ -3,10 +3,10 @@ databaseChangeLog:
       id: 03-create-transactions-table
       author: mike
       preConditions:
-        onFail: MARK_RAN
-                  - not:
-                  tableExists:
-                    tableName: transactions
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: transactions
       changes:
         - createTable:
             tableName: transactions
