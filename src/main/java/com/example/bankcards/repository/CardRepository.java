@@ -6,8 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CardRepository extends JpaRepository<Card, Long> {
-    Page<Card> findByOwnerUsername(String username, Pageable pageable);
-    Page<Card> findByOwnerUsernameAndNumberContaining(
-            String username, String number, Pageable pageable
+    // Для администратора — все карты
+    Page<Card> findAll(Pageable pageable);
+
+    // Для пользователя — только свои
+    Page<Card> findByOwnerUsernameAndNumberContainingIgnoreCase(
+            String username,
+            String numberPart,
+            Pageable pageable
     );
 }

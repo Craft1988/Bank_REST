@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 03-create-cards-table
+      id: 02-create-cards-table
       author: mike (generated)
       changes:
         - createTable:

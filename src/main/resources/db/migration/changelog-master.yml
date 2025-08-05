@@ -2,6 +2,7 @@ databaseChangeLog:
   - property:
       name: schema
       value: "banking_v1"
+
   - include:
       file: db/migration/schemas/init-schema.yml
   - include:
