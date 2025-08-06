@@ -60,7 +60,7 @@ public class UserCardController {
     ) {
         String username = getCurrentUsername();
         Pageable pageable = PageRequest.of(page, size);
-        return cardService.listMyCards(username, numberFilter, pageable);
+        return cardService.myCards(username, numberFilter, pageable);
     }
 
     @Operation(
@@ -82,8 +82,8 @@ public class UserCardController {
     })
     @PostMapping("/{id}/block-request")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void requestBlock(@PathVariable Long id) {
-        cardService.requestBlock(getCurrentUsername(), id);
+    public void block(@PathVariable Long id) {
+        cardService.blockCard(getCurrentUsername(), id);
     }
 
     @Operation(
@@ -106,8 +106,8 @@ public class UserCardController {
                             schema = @Schema(implementation = ErrorResponseDto.class)))
     })
     @GetMapping("/{id}/balance")
-    public BigDecimal getBalance(@PathVariable Long id) {
-        return cardService.getBalance(getCurrentUsername(), id);
+    public BigDecimal balance(@PathVariable Long id) {
+        return cardService.balance(getCurrentUsername(), id);
     }
 
     /**

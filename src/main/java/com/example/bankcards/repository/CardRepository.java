@@ -4,6 +4,10 @@ import com.example.bankcards.entity.Card;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Репозиторий для работы с сущностью {@link Card}.
@@ -34,5 +38,14 @@ public interface CardRepository extends JpaRepository<Card, Long> {
             String numberPart,
             Pageable pageable
     );
+
+    /**
+     * Выполнит «чистый» DELETE по ID,
+     * вернёт количество удалённых строк (0 или 1).
+     */
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Card c WHERE c.id = :id")
+    int deleteCardById(@Param("id") Long id);
 }
 

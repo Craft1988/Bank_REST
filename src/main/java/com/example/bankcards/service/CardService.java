@@ -46,7 +46,7 @@ public interface CardService {
      * @param pageable параметры пагинации
      * @return страница с результатами
      */
-    Page<CardDto> listMyCards(String username, String numberFilter, Pageable pageable);
+    Page<CardDto> myCards(String username, String numberFilter, Pageable pageable);
 
     /**
      * Возвращает список всех карт с пагинацией.
@@ -55,7 +55,7 @@ public interface CardService {
      * @param pageable параметры пагинации
      * @return страница со всеми картами
      */
-    Page<CardDto> listAll(Pageable pageable);
+    Page<CardDto> allCards(Pageable pageable);
 
     /**
      * Отправляет запрос на блокировку карты.
@@ -63,7 +63,7 @@ public interface CardService {
      * @param username имя пользователя, отправившего запрос
      * @param cardId идентификатор карты для блокировки
      */
-    void requestBlock(String username, Long cardId);
+    void blockCard(String username, Long cardId);
 
     /**
      * Возвращает баланс по карте.
@@ -72,6 +72,6 @@ public interface CardService {
      * @param cardId идентификатор карты
      * @return текущий баланс карты
      */
-    BigDecimal getBalance(String username, Long cardId);
+    BigDecimal balance(String username, Long cardId);
 }
 

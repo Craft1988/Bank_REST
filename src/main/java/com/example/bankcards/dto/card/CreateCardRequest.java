@@ -2,6 +2,7 @@ package com.example.bankcards.dto.card;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @Schema(description = "Запрос на создание новой карты")
 public class CreateCardRequest {
 
@@ -31,6 +33,6 @@ public class CreateCardRequest {
 
     @NotBlank
     @Size(min = 4, max = 20, message = "Имя пользователя должно быть от 4 до 20 символов")
-    @Schema(description = "Имя владельца карты", example = "mikhail_dev")
+    @Schema(description = "Имя владельца карты", example = "Ivan")
     private String ownerUsername;
 }

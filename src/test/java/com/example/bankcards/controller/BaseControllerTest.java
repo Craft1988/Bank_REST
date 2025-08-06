@@ -14,10 +14,9 @@ public abstract class BaseControllerTest {
     @Autowired
     protected MockMvc mockMvc;
 
+    @Autowired
     protected ObjectMapper objectMapper;
 
     @MockitoBean
     protected CardService cardService;
-
-
 }

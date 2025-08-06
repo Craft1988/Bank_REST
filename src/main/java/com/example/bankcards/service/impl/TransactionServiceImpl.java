@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
 
-    public List<TransactionResponseDto> getHistory(Long userId) {
+    public List<TransactionResponseDto> history(Long userId) {
         List<Transaction> sent = txRepo.findByFromCardOwnerIdOrderByCreatedAtDesc(userId);
         List<Transaction> recv = txRepo.findByToCardOwnerIdOrderByCreatedAtDesc(userId);
 

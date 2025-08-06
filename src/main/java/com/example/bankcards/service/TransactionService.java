@@ -28,7 +28,7 @@ public interface TransactionService {
      * @param userId идентификатор пользователя
      * @return список транзакций, совершенных пользователем
      */
-    List<TransactionResponseDto> getHistory(Long userId);
+    List<TransactionResponseDto> history(Long userId);
 
     /**
      * Проверяет корректность перевода: карты должны быть активны,

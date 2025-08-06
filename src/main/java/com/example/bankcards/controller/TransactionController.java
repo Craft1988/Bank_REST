@@ -81,6 +81,6 @@ public class TransactionController {
     @GetMapping("/history/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<TransactionResponseDto> history(@PathVariable Long userId) {
-        return txService.getHistory(userId);
+        return txService.history(userId);
     }
 }

@@ -123,11 +123,11 @@ public class AdminCardController {
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<CardDto> listAll(
+    public Page<CardDto> allCards(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return cardService.listAll(pageable);
+        return cardService.allCards(pageable);
     }
 }

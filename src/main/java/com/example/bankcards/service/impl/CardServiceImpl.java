@@ -10,9 +10,9 @@ import com.example.bankcards.mapper.CardMapper;
 import com.example.bankcards.repository.CardRepository;
 import com.example.bankcards.repository.UserRepository;
 import com.example.bankcards.service.CardService;
-import com.example.bankcards.util.cardutils.CardNumberGenerator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
@@ -32,7 +33,6 @@ public class CardServiceImpl implements CardService {
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
 
         Card card = cardMapper.fromDto(req);
-        card.setNumber(CardNumberGenerator.number());
         card.setOwner(owner);
 
         return cardMapper.fromCard(cardRepository.save(card));
@@ -46,22 +46,22 @@ public class CardServiceImpl implements CardService {
     }
 
     public void deleteCard(Long cardId) {
-        cardRepository.deleteById(cardId);
+        cardRepository.deleteCardById(cardId);
     }
 
-    public Page<CardDto> listAll(Pageable pageable) {
+    public Page<CardDto> allCards(Pageable pageable) {
         return cardRepository
                 .findAll(pageable)
                 .map(cardMapper::fromCard);
     }
 
-    public Page<CardDto> listMyCards(String username, String numberFilter, Pageable pageable) {
+    public Page<CardDto> myCards(String username, String numberFilter, Pageable pageable) {
         return cardRepository
                 .findByOwnerUsernameAndNumberContainingIgnoreCase(username, numberFilter, pageable)
                 .map(cardMapper::fromCard);
     }
 
-    public void requestBlock(String username, Long cardId) {
+    public void blockCard(String username, Long cardId) {
         Card card = cardRepository.findById(cardId)
                 .orElseThrow(() -> new EntityNotFoundException("Карта не найдена"));
         if (!card.getOwner().getUsername().equals(username)) {
@@ -72,7 +72,7 @@ public class CardServiceImpl implements CardService {
         cardRepository.save(card);
     }
 
-    public BigDecimal getBalance(String username, Long cardId) {
+    public BigDecimal balance(String username, Long cardId) {
         Card card = cardRepository.findById(cardId)
                 .orElseThrow(() -> new EntityNotFoundException("Карта не найдена"));
         if (!card.getOwner().getUsername().equals(username)) {
